@@ -21,9 +21,9 @@ public class ActionsApp extends DialogflowApp {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActionsApp.class);
 
-    @ForIntent("Default Welcome Intent")
+    @ForIntent("Welcome Intent")
     public ActionResponse welcome(ActionRequest request) {
-        LOGGER.info("Welcome intent start.");
+        LOGGER.info("Welcome Intent -> start");
         ResponseBuilder responseBuilder = getResponseBuilder(request);
         ResourceBundle rb = ResourceBundle.getBundle("resources", Locale.forLanguageTag("en-US"));
         User user = request.getUser();
@@ -38,9 +38,9 @@ public class ActionsApp extends DialogflowApp {
         return responseBuilder.build();
     }
 
-    @ForIntent("bye")
+    @ForIntent("Good Bye Intent")
     public ActionResponse bye(ActionRequest request) {
-        LOGGER.info("Bye intent start.");
+        LOGGER.info("Good Bye Intent -> start");
         ResponseBuilder responseBuilder = getResponseBuilder(request);
         ResourceBundle rb = ResourceBundle.getBundle("resources", Locale.forLanguageTag("en-US"));
 
