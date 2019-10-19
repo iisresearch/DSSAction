@@ -6,10 +6,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @ServletComponentScan
 @SpringBootApplication
-public class DssActionApplication {
+public class DSSActionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DssActionApplication.class, args);
+		SpringApplication.run(DSSActionApplication.class, args);
 	}
 
 }
