@@ -49,7 +49,8 @@ public class ActionsApp extends DialogflowApp {
         Invocation.Builder req = target.request();
         
         Response res = req.accept(MediaType.APPLICATION_JSON).get();
-        LOGGER.debug(res.toString());
+        String strResponse = res.readEntity(String.class);
+        LOGGER.info("AOAME response: " + strResponse);
 
         LOGGER.info("Welcome intent end.");
         return responseBuilder.build();
