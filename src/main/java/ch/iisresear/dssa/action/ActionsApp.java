@@ -11,11 +11,21 @@ import com.google.actions.api.DialogflowApp;
 import com.google.actions.api.ForIntent;
 import com.google.actions.api.response.ResponseBuilder;
 import com.google.api.services.actions_fulfillment.v2.model.User;
+
+import ch.iisresear.dssa.Constants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.ws.rs.client.Invocation; 
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.Client; 
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class ActionsApp extends DialogflowApp {
 
@@ -33,6 +43,13 @@ public class ActionsApp extends DialogflowApp {
         } else {
             responseBuilder.add(rb.getString("welcome"));
         }
+        
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(Constants.WEB_SERVICE_URL);
+        Invocation.Builder req = target.request();
+        
+        Response res = req.accept(MediaType.APPLICATION_JSON).get();
+        LOGGER.debug(res.toString());
 
         LOGGER.info("Welcome intent end.");
         return responseBuilder.build();
