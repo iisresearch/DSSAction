@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: test,dev
+  jpa:
+    open-in-view: false
+#  h2:
+#    console:
+#      enabled: true
+#      path: /console
+#  datasource:
+#    url: jdbc:h2:file:./data/database
+#    username: sa
+#    password: sa

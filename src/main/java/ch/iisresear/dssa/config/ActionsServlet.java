@@ -5,11 +5,11 @@
 
 package ch.iisresear.dssa.config;
 
-import ch.iisresear.dssa.action.ActionsApp;
 import com.google.actions.api.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "actions", value = "/*")
 public class ActionsServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ActionsServlet.class);
-    private final App actionsApp = new ActionsApp();
+    @Inject
+    private App actionsApp;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -36,9 +36,7 @@ public class ActionsServlet extends HttpServlet {
             LOG.info("Generated json = {}", jsonResponse);
             res.setContentType("application/json");
             writeResponse(res, jsonResponse);
-        } catch (InterruptedException e) {
-            handleError(res, e);
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             handleError(res, e);
         }
     }
@@ -71,12 +69,12 @@ public class ActionsServlet extends HttpServlet {
         }
     }
 
-    private Map<String, String> getHeadersMap(HttpServletRequest request) {
-        Map<String, String> map = new HashMap();
+    private HashMap<String, String> getHeadersMap(HttpServletRequest request) {
+        HashMap<String, String> map = new HashMap<>();
 
-        Enumeration headerNames = request.getHeaderNames();
+        Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
-            String key = (String) headerNames.nextElement();
+            String key = headerNames.nextElement();
             String value = request.getHeader(key);
             map.put(key, value);
         }
