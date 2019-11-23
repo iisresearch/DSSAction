@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "actions", value = "/*")
+@WebServlet(name = "actions", value = "/actions/*")
 public class ActionsServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ActionsServlet.class);
     @Inject

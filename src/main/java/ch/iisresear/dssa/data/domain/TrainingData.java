@@ -17,6 +17,7 @@ public class TrainingData {
     @GeneratedValue
     private Long id;
     private String utterance;
+    @Column(length=3000)
     private String response;
     private String userId;
     @CreationTimestamp

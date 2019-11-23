@@ -6,8 +6,7 @@
 package ch.iisresear.dssa.action;
 
 import ch.iisresear.dssa.Constants;
-import ch.iisresear.dssa.data.domain.TrainingData;
-import ch.iisresear.dssa.data.repository.TrainingDataRepository;
+import ch.iisresear.dssa.service.ChatService;
 import com.google.actions.api.ActionRequest;
 import com.google.actions.api.ActionResponse;
 import com.google.actions.api.DialogflowApp;
@@ -31,12 +30,12 @@ import java.util.ResourceBundle;
 @Component
 public class ActionsApp extends DialogflowApp {
 
-    private TrainingDataRepository trainingDataRepository;
+    private ChatService chatService;
 
     @Autowired
-    public ActionsApp(TrainingDataRepository trainingDataRepository) {
+    public ActionsApp(ChatService chatService) {
         super();
-        this.trainingDataRepository = trainingDataRepository;
+        this.chatService = chatService;
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActionsApp.class);
@@ -45,19 +44,15 @@ public class ActionsApp extends DialogflowApp {
     public ActionResponse dialogCapturing (ActionRequest request) {
         LOGGER.info("Dialog Capturing Intent -> start");
         WebhookRequest webhookRequest = request.getWebhookRequest();
-        TrainingData trainingData = new TrainingData();
+        String response = null;
         if (webhookRequest != null) {
-            trainingData.setUserId(webhookRequest.getSession());
-            trainingData.setUtterance(webhookRequest.getQueryResult().getQueryText());
+            response = chatService.message(webhookRequest.getQueryResult().getQueryText(), webhookRequest.getSession());
         }
 
-        // do something....
-
-        trainingData.setResponse("hello");
-        trainingDataRepository.save(trainingData);
-
         ResponseBuilder responseBuilder = getResponseBuilder(request);
-        responseBuilder.add(trainingData.getResponse());
+        if (response != null) {
+            responseBuilder.add(response);
+        }
 
         LOGGER.info("Dialog Capturing Intent -> end");
         return responseBuilder.build();

@@ -3,6 +3,8 @@ spring:
     active: test,dev
   jpa:
     open-in-view: false
+gate:
+  application: classpath:gate/application.xgapp
 #  h2:
 #    console:
 #      enabled: true
