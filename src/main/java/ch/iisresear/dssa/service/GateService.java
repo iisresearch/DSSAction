@@ -5,15 +5,28 @@
 
 package ch.iisresear.dssa.service;
 
-import gate.*;
-import gate.util.GateException;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import gate.Annotation;
+import gate.AnnotationSet;
+import gate.Corpus;
+import gate.CorpusController;
+import gate.Document;
+import gate.Factory;
+import gate.FeatureMap;
+import gate.GateConstants;
+import gate.corpora.DocumentImpl;
+import gate.corpora.RepositioningInfo;
+import gate.util.GateException;
 
 @Service
 public class GateService {
@@ -48,5 +61,24 @@ public class GateService {
                 Factory.deleteResource(doc);
             }
         }
+    }
+    
+    public Set<String> getConcepts(String content) throws GateException{
+    	
+    	Set<String> ret = new HashSet<String>();
+    	AnnotationSet defaultAnnotSet = null;
+		defaultAnnotSet = processWithGate(content);
+		
+		Set annotTypesRequired = new HashSet();
+		annotTypesRequired.add("BICONCEPT");
+		
+		if(defaultAnnotSet != null) {
+			Set<Annotation> instances = new HashSet<Annotation>(defaultAnnotSet.get(annotTypesRequired));
+			for(Annotation instance : instances) {
+				FeatureMap curFeatures = instance.getFeatures();
+				if(curFeatures.containsKey("concept"))ret.add((String)curFeatures.get("concept"));
+			}
+		}
+		return ret;
     }
 }
