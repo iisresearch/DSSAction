@@ -31,7 +31,7 @@ public class ChatService {
 
         try {
             AnnotationSet annotationSet = gateService.processWithGate(utterance);
-            response = annotationSet.toString();
+            response = utterance + " " + annotationSet.toString();
         } catch (GateException e) {
             e.printStackTrace();
             response = e.getMessage();

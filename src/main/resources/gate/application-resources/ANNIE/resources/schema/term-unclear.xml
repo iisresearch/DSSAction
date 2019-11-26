@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<schema xmlns="http://www.w3.org/2000/10/XMLSchema">
+	<!-- XSchema definition for defect "term unclear"-->
+	<element name="term_unclear">
+		<complexType>
+			<attribute name="sub-category">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="unknown/undefined term/acronym/abbreviation"/>
+						<enumeration value="deadline/time interval unclear"/>
+						<enumeration value="recipient (office, authority, etc.) unclear"/>
+						<enumeration value="actor unclear"/>
+						<enumeration value="action unclear"/>
+						<enumeration value="other unclear term"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+			<attribute name="other"/>
+		</complexType>
+	</element>
+</schema>

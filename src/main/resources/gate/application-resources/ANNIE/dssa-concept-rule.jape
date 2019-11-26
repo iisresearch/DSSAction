@@ -1,0 +1,10 @@
+Phase:concepts
+Input: Token Lookup
+Options: control = appelt
+
+Rule:BICONCEPT
+(
+   ({Lookup.majorType == "biconcept"})
+):concept
+-->
+:concept.BICONCEPT = {concept = :concept.Lookup.concept}

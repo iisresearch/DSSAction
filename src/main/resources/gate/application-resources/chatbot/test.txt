@@ -1,0 +1,1 @@
+We have chosen product as a dimension and revenue and units sold as measures. It seems that the dimension is in a 1:n or 1:1 relationship with the facts.
