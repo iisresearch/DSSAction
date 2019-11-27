@@ -47,7 +47,7 @@ public class GateConfig {
     public CorpusController gateApplication() {
         LOGGER.info("Initializing Gate Application");
         try {
-            CorpusController corpusController = (CorpusController) PersistenceManager.loadObjectFromFile(ResourceUtils.getFile(gateProperties.getApplication()));
+            CorpusController corpusController = (CorpusController) PersistenceManager.loadObjectFromUrl(ResourceUtils.getURL(gateProperties.getApplication()));
             LOGGER.info("Gate Application initialized");
             return corpusController;
         } catch (IOException | ResourceInstantiationException | PersistenceException e) {
