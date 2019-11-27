@@ -7,10 +7,10 @@ package ch.iisresear.dssa.model;
 
 import ch.iisresear.dssa.service.GateService;
 import gate.util.GateException;
+import org.springframework.util.ResourceUtils;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Story {
@@ -26,13 +26,13 @@ public class Story {
 	 * Constructor that reads the story from a csv file.
 	 * @param storyFile
 	 */
-	public Story(File storyFile, GateService annotator) {
+	public Story(String storyFile, GateService annotator) {
 		
 		this.annotator = annotator;
 		allConstraints = new ArrayList<Constraint>();
 		
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(storyFile));
+			BufferedReader br = new BufferedReader(new InputStreamReader(ResourceUtils.getURL(storyFile).openStream()));
 			String strLine = br.readLine();
 						
 			while ((strLine = br.readLine()) != null)   {

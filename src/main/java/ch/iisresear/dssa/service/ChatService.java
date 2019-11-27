@@ -12,9 +12,7 @@ import ch.iisresear.dssa.model.Story;
 import gate.util.GateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -42,11 +40,7 @@ public class ChatService {
         
         Story curStory = null;
         if(!stories.containsKey(userId)) {
-            try {
-                curStory = new Story(ResourceUtils.getFile(dssaProperties.getStoryFile()), gateService);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            curStory = new Story(dssaProperties.getStoryFile(), gateService);
             stories.put(userId, curStory);
             if (curStory != null) {
                 return curStory.getNextResponse("");
