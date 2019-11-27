@@ -14,21 +14,20 @@ import gate.util.persistence.PersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Configuration
-//@ConditionalOnProperty("gate.application")
+@ConditionalOnProperty("gate.application")
 public class GateConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GateConfig.class);
 
-    @Autowired
-    ResourceLoader resourceLoader;
 
     @Autowired
     GateProperties gateProperties;
@@ -48,7 +47,7 @@ public class GateConfig {
     public CorpusController gateApplication() {
         LOGGER.info("Initializing Gate Application");
         try {
-            CorpusController corpusController = (CorpusController) PersistenceManager.loadObjectFromFile(resourceLoader.getResource(gateProperties.getApplication()).getFile());
+            CorpusController corpusController = (CorpusController) PersistenceManager.loadObjectFromFile(ResourceUtils.getFile(gateProperties.getApplication()));
             LOGGER.info("Gate Application initialized");
             return corpusController;
         } catch (IOException | ResourceInstantiationException | PersistenceException e) {

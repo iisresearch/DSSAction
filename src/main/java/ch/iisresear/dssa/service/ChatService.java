@@ -5,14 +5,14 @@
 
 package ch.iisresear.dssa.service;
 
-import ch.iisresear.dssa.model.Story;
 import ch.iisresear.dssa.config.DSSAProperties;
 import ch.iisresear.dssa.data.domain.TrainingData;
 import ch.iisresear.dssa.data.repository.TrainingDataRepository;
+import ch.iisresear.dssa.model.Story;
 import gate.util.GateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,15 +24,13 @@ public class ChatService {
     private TrainingDataRepository trainingDataRepository;
     private GateService gateService;
     private DSSAProperties dssaProperties;
-    private ResourceLoader resourceLoader;
     private Map<String,Story> stories;
 
     @Autowired
-    public ChatService(TrainingDataRepository trainingDataRepository, GateService gateService, DSSAProperties dssaProperties, ResourceLoader resourceLoader) {
+    public ChatService(TrainingDataRepository trainingDataRepository, GateService gateService, DSSAProperties dssaProperties) {
         this.trainingDataRepository = trainingDataRepository;
         this.gateService = gateService;
         this.dssaProperties = dssaProperties;
-        this.resourceLoader = resourceLoader;
         stories = new HashMap<String,Story>();
     }
 
@@ -45,7 +43,7 @@ public class ChatService {
         Story curStory = null;
         if(!stories.containsKey(userId)) {
             try {
-                curStory = new Story(resourceLoader.getResource(dssaProperties.getStoryFile()).getFile(), gateService);
+                curStory = new Story(ResourceUtils.getFile(dssaProperties.getStoryFile()), gateService);
             } catch (IOException e) {
                 e.printStackTrace();
             }
