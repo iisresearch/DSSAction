@@ -14,7 +14,6 @@ import gate.util.persistence.PersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
@@ -23,7 +22,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Configuration
-@ConditionalOnProperty("gate.application")
+//@ConditionalOnProperty("gate.application")
 public class GateConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GateConfig.class);
