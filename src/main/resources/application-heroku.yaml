@@ -11,3 +11,8 @@ spring:
             non_contextual_creation: true
     hibernate:
       ddl-auto: update
+    open-in-view: false
+gate:
+  application: classpath:gate/application.xgapp
+dssa:
+  storyfile: classpath:bi-constraints.csv
