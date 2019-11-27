@@ -5,6 +5,8 @@ spring:
     open-in-view: false
 gate:
   application: classpath:gate/application.xgapp
+dssa:
+  storyfile: classpath:bi-constraints.csv
 #  h2:
 #    console:
 #      enabled: true

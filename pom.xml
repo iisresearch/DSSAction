@@ -66,7 +66,7 @@
 		<!-- GATE Embedded -->
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
-			<artifactId>gate-spring</artifactId>
+			<artifactId>gate-core</artifactId>
 			<version>8.6</version>
 			<!-- Spring boot uses logback for logging, so exclude log4j ... -->
 			<exclusions>

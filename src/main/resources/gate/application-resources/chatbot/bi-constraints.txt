@@ -1,7 +1,0 @@
-- constraints:
-	1. grain -> fact, row
-	2. grain, dimension -> true to the grain
-	3. dimension, true to the grain -> single value
-	4. measure, true to the grain -> single value
-	5. hierarchy levels -> 1:n relationship, drill down
-	
