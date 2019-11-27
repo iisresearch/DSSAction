@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
-  ~ All rights reserved.
-  -->
-
 <gate.util.persistence.GateApplication>
   <urlList class="gate.util.persistence.CollectionPersistence">
     <localList>
@@ -104,27 +99,6 @@
               <mapType>gate.util.SimpleFeatureMapImpl</mapType>
               <localMap />
             </runtimeParams>
-            <resourceType>gate.creole.gazetteer.DefaultGazetteer</resourceType>
-            <resourceName>ANNIE Gazetteer</resourceName>
-            <initParams class="gate.util.persistence.MapPersistence">
-              <mapType>gate.util.SimpleFeatureMapImpl</mapType>
-              <localMap />
-            </initParams>
-            <features class="gate.util.persistence.MapPersistence">
-              <mapType>gate.util.SimpleFeatureMapImpl</mapType>
-              <localMap />
-            </features>
-          </pr>
-        </gate.util.persistence.AnalyserRunningStrategyPersistence>
-        <gate.util.persistence.AnalyserRunningStrategyPersistence>
-          <runMode>1</runMode>
-          <featureName />
-          <featureValue />
-          <pr class="gate.util.persistence.LanguageAnalyserPersistence">
-            <runtimeParams class="gate.util.persistence.MapPersistence">
-              <mapType>gate.util.SimpleFeatureMapImpl</mapType>
-              <localMap />
-            </runtimeParams>
             <resourceType>gate.creole.splitter.SentenceSplitter</resourceType>
             <resourceName>ANNIE Sentence Splitter</resourceName>
             <initParams class="gate.util.persistence.MapPersistence">
@@ -192,7 +166,7 @@
                       <string>Token.string</string>
                       <string>Token.root</string>
                     </localList>
-                    <collectionType>java.util.Arrays$ArrayList</collectionType>
+                    <collectionType>java.util.ArrayList</collectionType>
                   </gate.util.persistence.CollectionPersistence>
                 </entry>
                 <entry>
@@ -212,6 +186,10 @@
                     <initParams class="gate.util.persistence.MapPersistence">
                       <mapType>gate.util.SimpleFeatureMapImpl</mapType>
                       <localMap>
+                        <entry>
+                          <string>gazetteerFeatureSeparator</string>
+                          <string>\t</string>
+                        </entry>
                         <entry>
                           <string>listsURL</string>
                           <gate.util.persistence.PersistenceManager-RRPersistence>
@@ -278,7 +256,6 @@
         <gate.util.persistence.LanguageAnalyserPersistence reference="../../../strategiesList/localList/gate.util.persistence.AnalyserRunningStrategyPersistence[5]/pr" />
         <gate.util.persistence.LanguageAnalyserPersistence reference="../../../strategiesList/localList/gate.util.persistence.AnalyserRunningStrategyPersistence[6]/pr" />
         <gate.util.persistence.LanguageAnalyserPersistence reference="../../../strategiesList/localList/gate.util.persistence.AnalyserRunningStrategyPersistence[7]/pr" />
-        <gate.util.persistence.LanguageAnalyserPersistence reference="../../../strategiesList/localList/gate.util.persistence.AnalyserRunningStrategyPersistence[8]/pr" />
       </localList>
       <collectionType>java.util.ArrayList</collectionType>
     </prList>
